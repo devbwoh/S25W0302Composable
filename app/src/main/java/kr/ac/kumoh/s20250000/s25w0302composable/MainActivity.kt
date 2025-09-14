@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -51,6 +52,7 @@ fun MainScreen() {
         Column(
             modifier = Modifier.padding(innerPadding)
         ) {
+            Counter()
             Counter()
         }
     }
@@ -105,6 +107,32 @@ fun ColumnScope.Counter() {
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = "다른 버튼들"
                 )
+            }
+        }
+        AnimatedVisibility(expanded) {
+            Row {
+                Button(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(8.dp),
+                    onClick = {
+                        count--
+                        expanded = false
+                    }
+                ) {
+                    Text("감소")
+                }
+                Button(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(8.dp),
+                    onClick = {
+                        count = 0
+                        expanded = false
+                    }
+                ) {
+                    Text("초기화")
+                }
             }
         }
     }
